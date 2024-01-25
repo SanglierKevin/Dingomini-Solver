@@ -1,219 +1,22 @@
-# Vide = 0
-# Bleu = 1
-# Gris = 2
-# Rose = 3
-# Vert = 4
-# Rouge = 5
-# Jaune = 6
-
-tile1 = [(5, 6),
-         (3, 5)]
-
-tile2 = [(2, 4),
-         (1, 2)]
-
-tile3 = [(2, 6),
-         (1, 4)]
-
-tile4 = [(1, 4),
-         (6, 3)]
-
-tile5 = [(4, 6),
-         (5, 3)]
-
-tile6 = [(3, 1),
-         (6, 5)]
-
-tile7 = [(2, 4),
-         (5, 3)]
-
-tile8 = [(3, 2),
-         (1, 4)]
-
-tile9 = [(5, 1),
-         (2, 6)]
-
-tile0 = [(0, 0),
-         (0, 0)]
-
-tiles = [tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9]
-
-
 def rotate(matrix):
     try:
         for x in range(len(matrix)):
             for y in range(len(matrix[0])):
                 matrix[x][y] = rotate(matrix[x][y])
     finally:
-        return list(zip(*matrix[::-1]))
-
-
-def printT(matrix):
-    for a in range(2):
-        for b in range(2):
-            print(color(matrix[a][b]), end="")
-        print("")
-    print("")
+        return [list(row) for row in zip(*matrix[::-1])]
 
 
 def printM(matrix):
-    for a in range(3):
+    for a in range(len(matrix)):
+        if (matrix[a][0] == tile0):
+            break
         for b in range(2):
-            for c in range(3):
+            for c in range(len(matrix[0])):
                 for d in range(2):
                     print(color(matrix[a][c][b][d]), end="")
             print("")
     print("")
-
-
-def checkHorizontal(game, line):
-    if line == 1:
-        line1 = [game[0][0][0][0], game[0][0][0][1], game[0][1][0][0], game[0][1][0][1], game[0][2][0][0], game[0][2][0][1]]
-        line2 = [game[0][0][1][0], game[0][0][1][1], game[0][1][1][0], game[0][1][1][1], game[0][2][1][0], game[0][2][1][1]]
-
-        while len(line1) != 1:
-            if line1[0] != 0 and line1[0] in line1[1:]:
-                return False
-            line1 = line1[1:]
-
-        while len(line2) != 1:
-            if line2[0] != 0 and line2[0] in line2[1:]:
-                return False
-            line2 = line2[1:]
-
-    elif line == 2:
-        line3 = [game[1][0][0][0], game[1][0][0][1], game[1][1][0][0], game[1][1][0][1], game[1][2][0][0], game[1][2][0][1]]
-        line4 = [game[1][0][1][0], game[1][0][1][1], game[1][1][1][0], game[1][1][1][1], game[1][2][1][0], game[1][2][1][1]]
-
-        while len(line3) != 1:
-            if line3[0] != 0 and line3[0] in line3[1:]:
-                return False
-            line3 = line3[1:]
-
-        while len(line4) != 1:
-            if line4[0] != 0 and line4[0] in line4[1:]:
-                return False
-            line4 = line4[1:]
-
-    elif line == 3:
-        line5 = [game[2][0][0][0], game[2][0][0][1], game[2][1][0][0], game[2][1][0][1], game[2][2][0][0], game[2][2][0][1]]
-        line6 = [game[2][0][1][0], game[2][0][1][1], game[2][1][1][0], game[2][1][1][1], game[2][2][1][0], game[2][2][1][1]]
-
-        while len(line5) != 1:
-            if line5[0] != 0 and line5[0] in line5[1:]:
-                return False
-            line5 = line5[1:]
-
-        while len(line6) != 1:
-            if line6[0] != 0 and line6[0] in line6[1:]:
-                return False
-            line6 = line6[1:]
-
-    return True
-
-
-def checkVertical(game, col):
-    if col == 1:
-        col1 = [game[0][0][0][0], game[0][0][1][0], game[1][0][0][0], game[1][0][1][0], game[2][0][0][0], game[2][0][1][0]]
-        col2 = [game[0][0][0][1], game[0][0][1][1], game[1][0][0][1], game[1][0][1][1], game[2][0][0][1], game[2][0][1][1]]
-
-        while len(col1) != 1:
-            if col1[0] != 0 and col1[0] in col1[1:]:
-                return False
-            col1 = col1[1:]
-
-        while len(col2) != 1:
-            if col2[0] != 0 and col2[0] in col2[1:]:
-                return False
-            col2 = col2[1:]
-
-    elif col == 2:
-        col3 = [game[0][1][0][0], game[0][1][1][0], game[1][1][0][0], game[1][1][1][0], game[2][1][0][0], game[2][1][1][0]]
-        col4 = [game[0][1][0][1], game[0][1][1][1], game[1][1][0][1], game[1][1][1][1], game[2][1][0][1], game[2][1][1][1]]
-
-        while len(col3) != 1:
-            if col3[0] != 0 and col3[0] in col3[1:]:
-                return False
-            col3 = col3[1:]
-
-        while len(col4) != 1:
-            if col4[0] != 0 and col4[0] in col4[1:]:
-                return False
-            col4 = col4[1:]
-
-    elif col == 3:
-        col5 = [game[0][2][0][0], game[0][2][1][0], game[1][2][0][0], game[1][2][1][0], game[2][2][0][0], game[2][2][1][0]]
-        col6 = [game[0][2][0][1], game[0][2][1][1], game[1][2][0][1], game[1][2][1][1], game[2][2][0][1], game[2][2][1][1]]
-
-        while len(col5) != 1:
-            if col5[0] != 0 and col5[0] in col5[1:]:
-                return False
-            col5 = col5[1:]
-
-        while len(col6) != 1:
-            if col6[0] != 0 and col6[0] in col6[1:]:
-                return False
-            col6 = col6[1:]
-
-    return True
-
-
-def checkOblique(game, cards):
-    if cards == 4:
-        obl1 = [game[0][0][0][0], game[0][0][1][1], game[1][1][0][0], game[1][1][1][1]]
-        obl2 = [game[1][0][1][0], game[1][0][0][1], game[0][1][1][0], game[0][1][0][1]]
-
-        while len(obl1) != 1:
-            if obl1[0] != 0 and obl1[0] in obl1[1:]:
-                return False
-            obl1 = obl1[1:]
-
-        while len(obl2) != 1:
-            if obl2[0] != 0 and obl2[0] in obl2[1:]:
-                return False
-            obl2 = obl2[1:]
-
-    elif cards == 6:
-        obl3 = [game[0][0][0][0], game[0][0][1][1], game[1][1][0][0], game[1][1][1][1]]
-        obl4 = [game[0][1][0][0], game[0][1][1][1], game[1][2][0][0], game[1][2][1][1]]
-        obl5 = [game[1][0][1][0], game[1][0][0][1], game[0][1][1][0], game[0][1][0][1]]
-        obl6 = [game[1][1][1][0], game[1][1][0][1], game[0][2][1][0], game[0][2][0][1]]
-
-        while len(obl3) != 1:
-            if obl3[0] != 0 and obl3[0] in obl3[1:]:
-                return False
-            obl3 = obl3[1:]
-
-        while len(obl4) != 1:
-            if obl4[0] != 0 and obl4[0] in obl4[1:]:
-                return False
-            obl4 = obl4[1:]
-
-        while len(obl5) != 1:
-            if obl5[0] != 0 and obl5[0] in obl5[1:]:
-                return False
-            obl5 = obl5[1:]
-
-        while len(obl6) != 1:
-            if obl6[0] != 0 and obl6[0] in obl6[1:]:
-                return False
-            obl6 = obl6[1:]
-
-    elif cards == 9:
-        obl7 = [game[0][0][0][0], game[0][0][1][1], game[1][1][0][0], game[1][1][1][1], game[2][2][0][0], game[2][2][1][1]]
-        obl8 = [game[2][0][1][0], game[2][0][0][1], game[1][1][1][0], game[1][1][0][1], game[0][2][1][0], game[0][2][0][1]]
-
-        while len(obl7) != 1:
-            if obl7[0] != 0 and obl7[0] in obl7[1:]:
-                return False
-            obl7 = obl7[1:]
-
-        while len(obl8) != 1:
-            if obl8[0] != 0 and obl8[0] in obl8[1:]:
-                return False
-            obl8 = obl8[1:]
-
-    return True
 
 
 def color(code):
@@ -234,12 +37,100 @@ def color(code):
             return ""
 
 
-print("Tiles :\n")
+def checkHorizontal(line):
+    line1 = [game[line][0][0][0], game[line][0][0][1], game[line][1][0][0], game[line][1][0][1], game[line][2][0][0], game[line][2][0][1]]
+    line1 = list(filter((0).__ne__, line1))
+    line2 = [game[line][0][1][0], game[line][0][1][1], game[line][1][1][0], game[line][1][1][1], game[line][2][1][0], game[line][2][1][1]]
+    line2 = list(filter((0).__ne__, line2))
+    if len(line1) != len(set(line1)) or len(line2) != len(set(line2)):
+        return False
+    return True
 
-for x in tiles:
-    printT(x)
 
-game = [[tile1, tile2, tile3], [tile4, tile5, tile6], [tile7, tile8, tile9]]
+def checkVertical(column):
+    col1 = [game[0][column][0][0], game[0][column][1][0], game[1][column][0][0], game[1][column][1][0], game[2][column][0][0], game[2][column][1][0]]
+    col1 = list(filter((0).__ne__, col1))
+    col2 = [game[0][column][0][1], game[0][column][1][1], game[1][column][0][1], game[1][column][1][1], game[2][column][0][1], game[2][column][1][1]]
+    col2 = list(filter((0).__ne__, col2))
+    if len(col1) != len(set(col1)) or len(col2) != len(set(col2)):
+        return False
+    return True
+
+
+def checkOblique(cards):
+    if cards == 4:
+        obl1 = [game[0][0][0][0], game[0][0][1][1], game[1][1][0][0], game[1][1][1][1]]
+        obl1 = list(filter((0).__ne__, obl1))
+        obl2 = [game[1][0][1][0], game[1][0][0][1], game[0][1][1][0], game[0][1][0][1]]
+        obl2 = list(filter((0).__ne__, obl2))
+
+        if len(obl1) != len(set(obl1)) or len(obl2) != len(set(obl2)):
+            return False
+        return True
+
+    elif cards == 6:
+        obl3 = [game[0][0][0][0], game[0][0][1][1], game[1][1][0][0], game[1][1][1][1]]
+        obl3 = list(filter((0).__ne__, obl3))
+        obl4 = [game[0][1][0][0], game[0][1][1][1], game[1][2][0][0], game[1][2][1][1]]
+        obl4 = list(filter((0).__ne__, obl4))
+        obl5 = [game[1][0][1][0], game[1][0][0][1], game[0][1][1][0], game[0][1][0][1]]
+        obl5 = list(filter((0).__ne__, obl5))
+        obl6 = [game[1][1][1][0], game[1][1][0][1], game[0][2][1][0], game[0][2][0][1]]
+        obl6 = list(filter((0).__ne__, obl6))
+
+        if len(obl3) != len(set(obl3)) or len(obl4) != len(set(obl4)) or len(obl5) != len(set(obl5)) or len(obl6) != len(set(obl6)):
+            return False
+        return True
+
+    elif cards == 9:
+        obl7 = [game[0][0][0][0], game[0][0][1][1], game[1][1][0][0], game[1][1][1][1], game[2][2][0][0], game[2][2][1][1]]
+        obl7 = list(filter((0).__ne__, obl7))
+        obl8 = [game[2][0][1][0], game[2][0][0][1], game[1][1][1][0], game[1][1][0][1], game[0][2][1][0], game[0][2][0][1]]
+        obl8 = list(filter((0).__ne__, obl8))
+
+        if len(obl7) != len(set(obl7)) or len(obl8) != len(set(obl8)):
+            return False
+        return True
+
+
+# Vide = 0
+# Bleu = 1
+# Gris = 2
+# Rose = 3
+# Vert = 4
+# Rouge = 5
+# Jaune = 6
+tile1 = [[5, 6],
+         [3, 5]]
+
+tile2 = [[2, 4],
+         [1, 2]]
+
+tile3 = [[2, 6],
+         [1, 4]]
+
+tile4 = [[1, 4],
+         [6, 3]]
+
+tile5 = [[4, 6],
+         [5, 3]]
+
+tile6 = [[3, 1],
+         [6, 5]]
+
+tile7 = [[2, 4],
+         [5, 3]]
+
+tile8 = [[3, 2],
+         [1, 4]]
+
+tile9 = [[5, 1],
+         [2, 6]]
+
+tile0 = [[0, 0],
+         [0, 0]]
+
+tiles = [tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9]
 
 sol4List = []
 sol4Found = 0
@@ -247,6 +138,11 @@ sol6List = []
 sol6Found = 0
 sol9List = []
 sol9Found = 0
+
+print("\nTiles :")
+
+for x in tiles:
+    printM([[x]])
 
 posUpLeft = tile0
 posUpCenter = tile0
@@ -275,7 +171,7 @@ for a in tiles:
 
                 for c in cleanTiles2:
                     game = [[posUpLeft, posUpCenter, posUpRight], [posMiddleLeft, posMiddleCenter, posMiddleRight], [posBottomLeft, posBottomCenter, posBottomRight]]
-                    if checkHorizontal(game, 1) == False:
+                    if checkHorizontal(0) == False:
                         break
                     cleanTiles3 = cleanTiles2.copy()
                     posMiddleLeft = c
@@ -285,18 +181,18 @@ for a in tiles:
 
                         for d in cleanTiles3:
                             game = [[posUpLeft, posUpCenter, posUpRight], [posMiddleLeft, posMiddleCenter, posMiddleRight], [posBottomLeft, posBottomCenter, posBottomRight]]
-                            if checkVertical(game, 1) == False:
+                            if checkVertical(0) == False:
                                 break
                             posMiddleCenter = d
                             for xd in range(4):
                                 posMiddleCenter = rotate(posMiddleCenter)
 
                                 game = [[posUpLeft, posUpCenter, posUpRight], [posMiddleLeft, posMiddleCenter, posMiddleRight], [posBottomLeft, posBottomCenter, posBottomRight]]
-                                if checkHorizontal(game, 2) == False:
+                                if checkHorizontal(1) == False:
                                     break
-                                if checkVertical(game, 2) == False:
+                                if checkVertical(1) == False:
                                     break
-                                if checkOblique(game, 4) == False:
+                                if checkOblique(4) == False:
                                     break
                                 for xxx in range(4):
                                     check = True
@@ -343,7 +239,7 @@ for a in tiles:
 
                         for d in cleanTiles3:
                             game = [[posUpLeft, posUpCenter, posUpRight], [posMiddleLeft, posMiddleCenter, posMiddleRight], [posBottomLeft, posBottomCenter, posBottomRight]]
-                            if checkHorizontal(game, 1) == False:
+                            if checkHorizontal(0) == False:
                                 break
                             cleanTiles4 = cleanTiles3.copy()
                             posMiddleLeft = d
@@ -353,7 +249,7 @@ for a in tiles:
 
                                 for e in cleanTiles4:
                                     game = [[posUpLeft, posUpCenter, posUpRight], [posMiddleLeft, posMiddleCenter, posMiddleRight], [posBottomLeft, posBottomCenter, posBottomRight]]
-                                    if checkVertical(game, 1) == False:
+                                    if checkVertical(0) == False:
                                         break
                                     cleanTiles5 = cleanTiles4.copy()
                                     posMiddleCenter = e
@@ -363,18 +259,18 @@ for a in tiles:
 
                                         for f in cleanTiles5:
                                             game = [[posUpLeft, posUpCenter, posUpRight], [posMiddleLeft, posMiddleCenter, posMiddleRight], [posBottomLeft, posBottomCenter, posBottomRight]]
-                                            if checkVertical(game, 2) == False:
+                                            if checkVertical(1) == False:
                                                 break
                                             posMiddleRight = f
                                             for xf in range(4):
                                                 posMiddleRight = rotate(posMiddleRight)
 
                                                 game = [[posUpLeft, posUpCenter, posUpRight], [posMiddleLeft, posMiddleCenter, posMiddleRight], [posBottomLeft, posBottomCenter, posBottomRight]]
-                                                if checkHorizontal(game, 2) == False:
+                                                if checkHorizontal(1) == False:
                                                     break
-                                                if checkVertical(game, 3) == False:
+                                                if checkVertical(2) == False:
                                                     break
-                                                if checkOblique(game, 6) == False:
+                                                if checkOblique(6) == False:
                                                     break
                                                 for xxx in range(4):
                                                     check = True
@@ -421,7 +317,7 @@ for a in tiles:
 
                         for d in cleanTiles3:
                             game = [[posUpLeft, posUpCenter, posUpRight], [posMiddleLeft, posMiddleCenter, posMiddleRight], [posBottomLeft, posBottomCenter, posBottomRight]]
-                            if checkHorizontal(game, 1) == False:
+                            if checkHorizontal(0) == False:
                                 break
                             cleanTiles4 = cleanTiles3.copy()
                             posMiddleLeft = d
@@ -445,7 +341,7 @@ for a in tiles:
 
                                                 for g in cleanTiles6:
                                                     game = [[posUpLeft, posUpCenter, posUpRight], [posMiddleLeft, posMiddleCenter, posMiddleRight], [posBottomLeft, posBottomCenter, posBottomRight]]
-                                                    if checkHorizontal(game, 2) == False:
+                                                    if checkHorizontal(1) == False:
                                                         break
                                                     cleanTiles7 = cleanTiles6.copy()
                                                     posBottomLeft = g
@@ -455,7 +351,7 @@ for a in tiles:
 
                                                         for h in cleanTiles7:
                                                             game = [[posUpLeft, posUpCenter, posUpRight], [posMiddleLeft, posMiddleCenter, posMiddleRight], [posBottomLeft, posBottomCenter, posBottomRight]]
-                                                            if checkVertical(game, 1) == False:
+                                                            if checkVertical(0) == False:
                                                                 break
                                                             cleanTiles8 = cleanTiles7.copy()
                                                             posBottomCenter = h
@@ -465,18 +361,18 @@ for a in tiles:
 
                                                                 for i in cleanTiles8:
                                                                     game = [[posUpLeft, posUpCenter, posUpRight], [posMiddleLeft, posMiddleCenter, posMiddleRight], [posBottomLeft, posBottomCenter, posBottomRight]]
-                                                                    if checkVertical(game, 2) == False:
+                                                                    if checkVertical(1) == False:
                                                                         break
                                                                     posBottomRight = i
                                                                     for xi in range(4):
                                                                         posBottomRight = rotate(posBottomRight)
 
                                                                         game = [[posUpLeft, posUpCenter, posUpRight], [posMiddleLeft, posMiddleCenter, posMiddleRight], [posBottomLeft, posBottomCenter, posBottomRight]]
-                                                                        if checkHorizontal(game, 3) == False:
+                                                                        if checkHorizontal(2) == False:
                                                                             break
-                                                                        if checkVertical(game, 3) == False:
+                                                                        if checkVertical(2) == False:
                                                                             break
-                                                                        if checkOblique(game, 9) == False:
+                                                                        if checkOblique(9) == False:
                                                                             break
                                                                         for xxx in range(4):
                                                                             check = True
@@ -489,15 +385,15 @@ for a in tiles:
                                                                         sol9Found += 1
                                                                         sol9List.append(game)
 
-print("Solutions (x4) :\n")
+print("\nSolutions (x4) :")
 for x in sol4List:
     printM(x)
-print("Solutions (x6) :\n")
+print("\nSolutions (x6) :")
 for x in sol6List:
     printM(x)
-print("Solutions (x9) :\n")
+print("\nSolutions (x9) :")
 for x in sol9List:
     printM(x)
-print("Found (x4) : " + str(sol4Found) + "/32\n")
-print("Found (x6) : " + str(sol6Found) + "/6\n")
-print("Found (x9) : " + str(sol9Found) + "/2\n")
+print("\nFound (x4) : " + str(sol4Found) + "/32")
+print("\nFound (x6) : " + str(sol6Found) + "/6")
+print("\nFound (x9) : " + str(sol9Found) + "/2\n")
