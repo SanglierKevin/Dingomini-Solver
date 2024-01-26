@@ -5,9 +5,9 @@ def treat(tiles, pos):
         tilesUpdated.remove(x)
         for posAfter in priority[pos+1:]:
             game[posAfter[0]][posAfter[1]] = tile0
-        for y in range(4):
+        for y in range(8):
             game[priority[pos][0]][priority[pos][1]] = rotate(game[priority[pos][0]][priority[pos][1]])
-            if check() == True:
+            if check():
                 treat(tilesUpdated, pos+1)
 
 
@@ -79,8 +79,8 @@ def check():
         case 3:
             return checkVertical(0)
         case 4:
-            if checkVertical(1) and checkHorizontal(1):  # + rotation
-                if checkOblique(4):
+            if checkHorizontal(1) and checkVertical(1):
+                if checkOblique(4) and checkRotate(sol4List):
                     append(sol4List)
                     global sol4Found
                     sol4Found += 1
@@ -89,8 +89,8 @@ def check():
         case 5:
             return checkHorizontal(0)
         case 6:
-            if checkHorizontal(1) and checkVertical(2):  # + rotation
-                if checkOblique(6):
+            if checkHorizontal(1) and checkVertical(2):
+                if checkOblique(6) and checkRotate(sol6List):
                     append(sol6List)
                     global sol6Found
                     sol6Found += 1
@@ -101,8 +101,8 @@ def check():
         case 8:
             return checkVertical(1)
         case 9:
-            if checkHorizontal(2) and checkVertical(2):  # + rotation
-                if checkOblique(9):
+            if checkHorizontal(2) and checkVertical(2):
+                if checkOblique(9) and checkRotate(sol9List):
                     append(sol9List)
                     global sol9Found
                     sol9Found += 1
@@ -164,6 +164,14 @@ def checkOblique(cards):
         if len(obl7) != len(set(obl7)) or len(obl8) != len(set(obl8)):
             return False
         return True
+
+
+def checkRotate(list):
+    test = game.copy()
+    for x in range(4):
+        if rotate(test) in list:
+            return False
+    return True
 
 
 # Vide = 0

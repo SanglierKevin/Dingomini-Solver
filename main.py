@@ -93,6 +93,14 @@ def checkOblique(cards):
         return True
 
 
+def checkRotate(list):
+    test = game.copy()
+    for x in range(4):
+        if rotate(test) in list:
+            return False
+    return True
+
+
 # Vide = 0
 # Bleu = 1
 # Gris = 2
@@ -194,13 +202,7 @@ for a in tiles:
                                     break
                                 if checkOblique(4) == False:
                                     break
-                                for xxx in range(4):
-                                    check = True
-                                    test = rotate(game)
-                                    if test in sol4List:
-                                        check = False
-                                        break
-                                if check == False:
+                                if checkRotate(sol4List) == False:
                                     break
                                 sol4Found += 1
                                 sol4List.append(game)
@@ -272,13 +274,7 @@ for a in tiles:
                                                     break
                                                 if checkOblique(6) == False:
                                                     break
-                                                for xxx in range(4):
-                                                    check = True
-                                                    test = rotate(game)
-                                                    if test in sol6List:
-                                                        check = False
-                                                        break
-                                                if check == False:
+                                                if checkRotate(sol6List) == False:
                                                     break
                                                 sol6Found += 1
                                                 sol6List.append(game)
@@ -374,13 +370,7 @@ for a in tiles:
                                                                             break
                                                                         if checkOblique(9) == False:
                                                                             break
-                                                                        for xxx in range(4):
-                                                                            check = True
-                                                                            test = rotate(game)
-                                                                            if test in sol9List:
-                                                                                check = False
-                                                                                break
-                                                                        if check == False:
+                                                                        if checkRotate(sol9List) == False:
                                                                             break
                                                                         sol9Found += 1
                                                                         sol9List.append(game)
