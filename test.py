@@ -5,7 +5,7 @@ def treat(tiles, pos):
         tilesUpdated.remove(x)
         for posAfter in priority[pos+1:]:
             game[posAfter[0]][posAfter[1]] = tile0
-        for y in range(8):
+        for y in range(4):
             game[priority[pos][0]][priority[pos][1]] = rotate(game[priority[pos][0]][priority[pos][1]])
             if check():
                 treat(tilesUpdated, pos+1)
